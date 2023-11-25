@@ -1,0 +1,56 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.remtop {
+    margin-top:2.5rem;
+}
+
+
+.centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sombra {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.Titulo {
+    font-size:2rem;
+}
+
+.Contenido {
+    font-size: 5rem;
+}
+
+.margen{
+    padding-left: 8rem;
+    padding-right: 8rem;
+    padding-top: 2rem;
+}
+
+.p {
+   /* padding-left: 8rem;
+    padding-right: 8rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+*/
+}

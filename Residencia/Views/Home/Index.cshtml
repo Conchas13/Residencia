@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Hola soy una pagina mal echa</h1>
+
+
+    <div class="row remtop" style="height:13rem">
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+                
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion (2023)
+                    </div>
+
+                    <div id="Total" class=" row centrado Contenido" style="height:70%;">
+                        100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion con pc (2023)
+                    </div>
+
+                    <div id ="TotalPc" class=" row centrado Contenido" style="height:70%;">
+                        80,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Porcentaje (%)
+                    </div>
+
+                    <div id="TotalPcP" class=" row centrado Contenido" style="height:70%;">
+                        80%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    
+
+    <div id="chart" class="remtop">
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <script src="~/js/PoblacionMexico.js?v=@DateTime.Now.ToString("yyyyMMdd")"></script>
+}
