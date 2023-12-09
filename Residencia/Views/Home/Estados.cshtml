@@ -1,5 +1,172 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Población en México por Estados</h1>
+
+
+    <div class="text-start">
+
+        @* <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" aria-expanded="false">
+                <span class="sr-only">Estados</span>
+            </button>
+            <div class="dropdown-menu">
+                <button class="dropdown-item" href="#">Action</button>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div> *@
+
+
+
+        <select id="selEsta" class="form-control2" style="width: 13%" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+    </div>
+    
+
+
+    <div class="row remtop" style="height:13rem">
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion (2020)
+                    </div>
+
+                    <div id="Total" class=" row centrado Contenido" style="height:70%;">
+                        100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion con pc (2020)
+                    </div>
+
+                    <div id="TotalPc" class=" row centrado Contenido" style="height:70%;">
+                        80,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Porcentaje (%)
+                    </div>
+
+                    <div id="TotalPcP" class=" row centrado Contenido" style="height:70%;">
+                        80%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="chart" class="remtop">
+    </div>
+
+</div>
+
+
+
+
+@* Parte 2 *@
+
+<div class="text-center">
+
+    <h1 class="display-4">Población en México por Estado con pc</h1>
+
+
+
+    <div class="row remtop" style="height:13rem">
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion (2020)
+                    </div>
+
+                    <div id="Total" class=" row centrado Contenido" style="height:70%;">
+                        100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion con pc (2020)
+                    </div>
+
+                    <div id="TotalPc" class=" row centrado Contenido" style="height:70%;">
+                        80,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Porcentaje (%)
+                    </div>
+
+                    <div id="TotalPcP" class=" row centrado Contenido" style="height:70%;">
+                        80%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="chart" class="remtop">
+    </div>
+
+</div>
+
+
+
+@* Este es el link de js con el nombre que le pusiste *@
+@section Scripts {
+    <script src="~/js/PoblacionEstados.js?v=@DateTime.Now.ToString("yyyyMMdd")"></script>
 }
