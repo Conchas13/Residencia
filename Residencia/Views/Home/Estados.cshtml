@@ -4,7 +4,7 @@
 
 <div class="text-center">
 
-    <h1 class="display-4">Población en México por Estados</h1>
+    <h1 class="display-2"><strong><em>Población en México por Estados</em></strong></h1>
 
 
     <div class="text-start">
@@ -20,8 +20,10 @@
             </div>
         </div> *@
 
+        
+        <p class="h5"><em>Seleccionar Estado.</em></p>
 
-
+        @* Esta parte del código es la del seleccionador de estado *@
         <select id="selEsta" class="form-control2" style="width: 13%" aria-label="Default select example">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
@@ -33,8 +35,10 @@
     
 
 
+    @* Esta parte del código es la de los recuadros que muestran los datos obtenidos de las API´s *@
     <div class="row remtop" style="height:13rem">
 
+        @* Esta parte del código es la del primer recuadro a la izquierda con la poblacion actual  del pais*@
         <div class="col-md-4 p" style="height:100%;">
             <div class="card sombra" style="height:100%">
 
@@ -50,7 +54,7 @@
             </div>
         </div>
 
-
+        @* Esta parte del código es la del segundo recuadro del centro con la poblacion actual del estado*@
         <div class="col-md-4 p" style="height:100%;">
             <div class="card sombra" style="height:100%">
 
@@ -67,7 +71,7 @@
         </div>
 
 
-
+        @* Esta parte del código es la del tercer recuadro a la derecha con el procentaje*@
         <div class="col-md-4 p" style="height:100%;">
             <div class="card sombra" style="height:100%">
 
@@ -87,14 +91,14 @@
 
     </div>
 
-
+    @* Esta parte del código es donde se llama la grafica (chart) *@
     <div id="chart" class="remtop">
     </div>
 
 </div>
 
 
-
+@* Creo que esta parte del codigo se va a tener que cancelar por el echo que el inegi no tiene API´s para estados con personas con pc *@
 
 @* Parte 2 *@
 

@@ -4,7 +4,7 @@ var ArrayTotalPc = [];
 var ArrayAñosTotal = [];
 var ArrayAñosTotalPc = [];
 
-/*en caunto la pag se cargue muestras la grafica o los datos*/
+/*en cuanto la pág se cargue muestras la grafica o los datos*/
 $(document).ready(function () {
     //grafica();
     getTotalPoblacion();
@@ -88,7 +88,7 @@ function removeDuplicates(inArray) {
     }
     return arr;
 }
-
+//Donde se crean las funciones de la grafica 
 function configuraciongrafica() {
     var Mezcla = ArrayAñosTotal.concat(ArrayAñosTotalPc);
     var res = removeDuplicates(Mezcla).toSorted();
@@ -146,6 +146,8 @@ function configuraciongrafica() {
 
 //Grafica general de México
 function grafica(Poblacion, PoblacionPc, Titulos) {
+
+    //Antigua tabla que no me convenció el diseño
     //var options = {
     //    series: [{
     //        name: 'Población.',
@@ -235,6 +237,7 @@ function grafica(Poblacion, PoblacionPc, Titulos) {
         //},
     };
 
+    //Aqui es donde se le da el nombre a la grafica para poder ser llamada 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
 }
@@ -256,7 +259,7 @@ function DropDownConstructor(datosJson, targetSelect) {
     //$('#' + targetSelect).val('-1');
 }
 
-//
+//Donde se optienen los estados
 function getEstados() {
     axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/CL_GEO_AREA/null/es/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
