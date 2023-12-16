@@ -3,23 +3,27 @@ var ArrayTotal = [];
 var ArrayTotalPc = [];
 var ArrayAñosTotal = [];
 var ArrayAñosTotalPc = [];
+var SelectedEstado ='07000001';
+var chart1;
+var firsttime = true;
 
 /*en cuanto la pág se cargue muestras la grafica o los datos*/
 $(document).ready(function () {
     //grafica();
-    getTotalPoblacion();
+    getTotalPoblacion(SelectedEstado);
     //getTotalPoblacionPcP();
-    //getTotalPA();
+    
     getEstados();
     $('#selEsta').select2();
 
     $('#selEsta').on('change', function () {
-        alert($('#selEsta').val());
+        var Estado = $('#selEsta').val();
+        getTotalPoblacion(Estado); getTotalPA(Estado);
     });
 });
 
 //Poblacion en general de México
-function getTotalPoblacion() {
+function getTotalPoblacion(Estado) {
     axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
             var Total = response.data.Series[0].OBSERVATIONS[0].OBS_VALUE;
@@ -27,26 +31,29 @@ function getTotalPoblacion() {
             $("#Total").text(numeral(Total).format('0,0'));
             TotalG = Total;
 
-            getTotalPoblacionPcP();
+            getTotalPoblacionPcP(Total,Estado);
         });
 }
 
-//Porcentaje de la población en México con Pc
-function getTotalPoblacionPcP() {
-    axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/6206972690/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
+//Poblacion total por Estado
+function getTotalPoblacionPcP(PoblacionMexico, Estado) {
+    axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/' + Estado + '/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
             var Total = response.data.Series[0].OBSERVATIONS[0].OBS_VALUE;
             //console.log(Total);
-            $("#TotalPcP").text(numeral(Total / 100).format('0.00 %'));
-            var TotalPc = (TotalG * Total) / 100;
-            $("#TotalPc").text(numeral(TotalPc).format('0,0'));
+            var TotalPc = (Total) / PoblacionMexico;
+            $("#TotalPcP").text(numeral(TotalPc).format('0.00 %'));
+            //console.log(TotalPc)
+            //console.log(Total)
+            //console.log(PoblacionMexico)
+            $("#TotalPc").text(numeral(Total).format('0,0'));
 
-            getTotalPA();
+            getTotalPA(Estado);
         });
 }
 
 //Población en general de México (varios años)
-function getTotalPA() {
+function getTotalPA(Estado) {
     axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/false/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
             var PoblacionTotal = response.data.Series[0].OBSERVATIONS;
@@ -55,15 +62,15 @@ function getTotalPA() {
             ArrayTotal = PoblacionTotal.map((x) => x.OBS_VALUE);
 
 
-            getTotalPAPc();
+            getTotalPAPc(Estado);
 
         });
 
 }
 
-//Población de la población en México con Pc (varios años)
-function getTotalPAPc() {
-    axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/6206972690/es/0700/false/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
+//Poblacion total por Estado (varios años)
+function getTotalPAPc(Estado) {
+    axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/' + Estado + '/false/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
             var PoblacionTotalPc = response.data.Series[0].OBSERVATIONS;
             ArrayAñosTotalPc = PoblacionTotalPc.map((x) => x.TIME_PERIOD)
@@ -122,98 +129,55 @@ function configuraciongrafica() {
         }
     }
 
-    //console.log(a1);
-    //console.log(a2);
+    console.log(a1);
+    console.log(a2);
+    console.log(res);
 
-    for (var i = 0; i < a1.length; i++) {
-        if (a2[i] == 0) {
-            a3.push(0);
-        }
-        else {
-            if (a1[i] != 0) {
-                a3.push((a2[i] * a1[i]) / 100)
-            }
-            else {
-                a3.push((a2[i] * 126014024) / 100)
-            }
-        }
-    }
+    //for (var i = 0; i < a1.length; i++) {
+    //    if (a2[i] == 0) {
+    //        a3.push(0);
+    //    }
+    //    else {
+    //        if (a1[i] != 0) {
+    //            a3.push((a2[i] * a1[i]) / 100)
+    //        }
+    //        else {
+    //            a3.push((a2[i] * 126014024) / 100)
+    //        }
+    //    }
+    //}
     //console.log(a3);
 
-    grafica(a1, a3, res);
+    if (firsttime) {
+        grafica(a1, a2, res);
+        firsttime = false;
+    }
+    else {
+        chart1.updateSeries([{
+            name: 'Población.',
+            data: a1
+        }, {
+            name: 'Población por Estado.',
+            data: a2
+        }])
+    }
+
+    
 }
 
 
 //Grafica general de México
 function grafica(Poblacion, PoblacionPc, Titulos) {
 
-    //Antigua tabla que no me convenció el diseño
-    //var options = {
-    //    series: [{
-    //        name: 'Población.',
-    //        data: [44, 55, 41, 67, 22, 43]
-    //    }, {
-    //        name: 'Población que cuenta con Pc en sus hogares.',
-    //        data: [13, 23, 20, 8, 13, 27]
 
-    //    }],
-    //    chart: {
-    //        type: 'bar',
-    //        height: 350,
-    //        stacked: true,
-    //        toolbar: {
-    //            show: true
-    //        },
-    //        zoom: {
-    //            enabled: true
-    //        }
-    //    },
-    //    responsive: [{
-    //        breakpoint: 480,
-    //        options: {
-    //            legend: {
-    //                position: 'bottom',
-    //                offsetX: -10,
-    //                offsetY: 0
-    //            }
-    //        }
-    //    }],
-    //    plotOptions: {
-    //        bar: {
-    //            horizontal: false,
-    //            borderRadius: 10,
-    //            dataLabels: {
-    //                total: {
-    //                    enabled: true,
-    //                    style: {
-    //                        fontSize: '13px',
-    //                        fontWeight: 900
-    //                    }
-    //                }
-    //            }
-    //        },
-    //    },
-    //    xaxis: {
-    //        type: 'datetime',
-    //        categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-    //            '01/05/2011 GMT', '01/06/2011 GMT'
-    //        ],
-    //    },
-    //    legend: {
-    //        position: 'right',
-    //        offsetY: 40
-    //    },
-    //    fill: {
-    //        opacity: 1
-    //    }
-    //};
+    $('#chat').html('');
 
     var options = {
         series: [{
             name: 'Población.',
             data: Poblacion
         }, {
-            name: 'Población que cuenta con Pc en sus hogares.',
+            name: 'Población por Estado.',
             data: PoblacionPc
         }],
         chart: {
@@ -239,6 +203,7 @@ function grafica(Poblacion, PoblacionPc, Titulos) {
 
     //Aqui es donde se le da el nombre a la grafica para poder ser llamada 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart1 = chart;
     chart.render();
 }
 
