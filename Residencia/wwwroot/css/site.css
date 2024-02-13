@@ -71,3 +71,10 @@ body {
     border-radius: .25rem !important;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
 }
+
+
+.chart-container {
+    width: 48%; /* Ajusta según el espacio disponible y para dejar margen entre las gráficas */
+    margin: 1%; /* Agrega margen entre las gráficas */
+    display: inline-block;
+}

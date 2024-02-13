@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@* Encapsula todo  *@
+<div class="text-center">
+
+    @* Titulo que se muestra en la parte de hasta arriba *@
+    <h1 class="display-2"><strong><em>Datos sobre el COVID-19 en México</em></strong></h1>
+
+
+    @* Esta parte del código es la de los recuadros que muestran los datos obtenidos de la API´s que realice (infectados) *@
+    <div class="row remtop" style="height:13rem">
+
+        @* Esta parte del código es la del primer recuadro a la izquierda *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion
+                    </div>
+
+                    <div id="Total" class=" row centrado Contenido" style="height:70%;">
+                        100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Esta parte del código es la del segundo recuadro del centro *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion infectada
+                    </div>
+
+                    <div id="TotalIf" class=" row centrado Contenido" style="height:70%;">
+                        80,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @* Esta parte del código es la del tercer recuadro a la derecha *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Porcentaje (%)
+                    </div>
+
+                    <div id="TotalIfP" class=" row centrado Contenido" style="height:70%;">
+                        80%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    @* Esta parte divide las primeras 2 graficas (infectadas y edades) *@
+    <div class="row align-items-center">
+        @* grafica de infectados *@
+        <div class="chart-container col-md-6">
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            <div id="chart1" class="remtop">
+            </div>
+        </div>
+
+        <div class="chart-container col-md-12">
+            <div class="chart-scroll-container" style="overflow-x: auto;">
+                <div id="chart2" class="remtop">
+                </div>
+            </div>
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            
+        </div>
+    </div>
+
+    @* grafica de edades *@
+    
+
+
+    @* Esta parte del código es la de los recuadros que muestran los datos obtenidos de la API´s que realice (infectados, fallecidos) *@
+    <div class="row remtop" style="height:13rem">
+
+        @* Esta parte del código es la del primer recuadro a la izquierda *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion infectada
+                    </div>
+
+                    <div id="TotalIf2" class=" row centrado Contenido" style="height:70%;">
+                        100,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Esta parte del código es la del segundo recuadro del centro *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Poblacion fallecida
+                    </div>
+
+                    <div id="TotalFa" class=" row centrado Contenido" style="height:70%;">
+                        80,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @* Esta parte del código es la del tercer recuadro a la derecha *@
+        <div class="col-md-4 p" style="height:100%;">
+            <div class="card sombra" style="height:100%">
+
+                <div class="card-body" style="height:100%">
+                    <div class=" row centrado Titulo" style="height:30%;">
+                        Porcentaje (%)
+                    </div>
+
+                    <div id="TotalFP" class=" row centrado Contenido" style="height:70%;">
+                        80%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    @* Esta parte del código es donde se llama la grafica (chart)  *@
+    <div id="chart3" class="remtop">
+    </div>
+
+
+    @* Esta parte divide las graficas 4 y 5 (Enfermedades y Embarazadas) *@
+    <div class="row align-items-center">
+        @* grafica de infectados *@
+        <div class="chart-container col-md-6">
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            <div id="chart4" class="remtop">
+            </div>
+        </div>
+
+        @* grafica de edades *@
+        <div class="chart-container col-md-6">
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            <div id="chart5" class="remtop">
+            </div>
+        </div>
+    </div>
+
+    @* Esta parte divide las graficas 6 y 7 (Intuvados y Institucion) *@
+    <div class="row align-items-center">
+        @* grafica de infectados *@
+        <div class="chart-container col-md-6">
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            
+            <div id="chart6" class="remtop">
+            </div>
+        </div>
+
+        @* grafica de edades *@
+        <div class="chart-container col-md-6">
+            @* Esta parte del código es donde se llama la grafica (chart)  *@
+            <div id="chart7" class="remtop">
+            </div>
+        </div>
+    </div>
+
+
+    
+
+</div>
+
+
+@* Este es el link de js con el nombre que le pusiste *@
+@section Scripts {
+    <script src="~/js/CovidMexico.js?v=@DateTime.Now.ToString("yyyyMMdd")"></script>
+}
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

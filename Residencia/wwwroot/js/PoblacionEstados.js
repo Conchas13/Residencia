@@ -9,6 +9,8 @@ var firsttime = true;
 
 /*en cuanto la pág se cargue muestras la grafica o los datos*/
 $(document).ready(function () {
+
+    
     //grafica();
     getTotalPoblacion(SelectedEstado);
     //getTotalPoblacionPcP();
@@ -24,6 +26,8 @@ $(document).ready(function () {
 
 //Poblacion en general de México
 function getTotalPoblacion(Estado) {
+    HoldOn.open(optionsl);
+
     axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
         .then(function (response) {
             var Total = response.data.Series[0].OBSERVATIONS[0].OBS_VALUE;
@@ -162,7 +166,7 @@ function configuraciongrafica() {
         }])
     }
 
-    
+    HoldOn.close();
 }
 
 

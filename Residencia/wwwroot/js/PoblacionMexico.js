@@ -20,15 +20,60 @@ $(document).ready(function () {
 
 //Poblacion en general de México
 function getTotalPoblacion() {
-    axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
-        .then(function (response) {
-            var Total = response.data.Series[0].OBSERVATIONS[0].OBS_VALUE;
-            /* console.log(numeral(Total).format('0,0'));*/
+    HoldOn.open(optionsl);
+
+    //axios.get('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
+    //    .then(function (response) {
+    //        var Total = response.data.Series[0].OBSERVATIONS[0].OBS_VALUE;
+    //        /* console.log(numeral(Total).format('0,0'));*/
+    //        $("#Total").text(numeral(Total).format('0,0'));
+    //        TotalG = Total;
+
+    //        getTotalPoblacionPcP();
+    //    });
+
+    ///-------------------------Otro metodo diferente------------------------------------------------
+    //$.ajax({
+    //    dataType: 'json',
+    //    type: "GET",
+    //    url: 'https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json',
+    //    dataType: 'jsonp',
+    //    cors: true,
+    //    contentType: 'application/json',
+    //    secure: true,
+    //    headers: {
+    //        'Access-Control-Allow-Origin': '*',
+    //    },
+    //    //beforeSend: function (xhr) {
+    //    //    xhr.setRequestHeader("Authorization", "Basic " + btoa(""));
+    //    //},
+    //    success: function (response) {
+    //        var Total = response.Series[0].OBSERVATIONS[0].OBS_VALUE;
+    //        /* console.log(numeral(Total).format('0,0'));*/
+    //        $("#Total").text(numeral(Total).format('0,0'));
+    //        TotalG = Total;
+    //        //console.log(data);
+    //        //console.log("Hola")
+    //    },
+    //    error: function (error) {
+    //        console.error('Error: ',error);
+    //        console.log("Adios", error)
+    //    }
+    //});
+
+    ///-------------------------Otro metodo diferente------------------------------------------------
+    fetch('https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/1002000001/es/0700/true/BISE/2.0/f0e26edb-55dd-c0b3-5822-55f75d0351ff?type=json')
+        .then(response => response.json())
+        .then(data => {
+            var Total = data.Series[0].OBSERVATIONS[0].OBS_VALUE;
+            /* console.log(numeral(Total).format('0,0')); */
             $("#Total").text(numeral(Total).format('0,0'));
             TotalG = Total;
 
             getTotalPoblacionPcP();
-        });
+        })
+        .catch(error => console.error('Error:', error));
+
 }
 
 //Porcentaje de la población en México con Pc
@@ -141,6 +186,8 @@ function configuraciongrafica() {
     //console.log(a3);
 
     grafica(a1, a3, res);
+
+    HoldOn.close();
 }
 
 
